@@ -28,7 +28,7 @@ def todo(arg):
 			 except:
 			 	print("Error: todo #{} does not exist. Nothing deleted.".format(arg[3]))
     
-    elif(arg[2] == "done"):
+        elif(arg[2] == "done"):
 		if(arg[3]):
 		 	try:
 		 		done = todoarray.pop(arg[3]-1)
