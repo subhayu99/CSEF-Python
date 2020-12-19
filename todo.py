@@ -8,7 +8,7 @@ def todo(arg):
 	with open('done.txt', 'w+') as donefile:
 		donearray = list(donefile.readlines.split("\n"))
 
-	if (arg[2]  == "help" || arg[2]  == ""):
+	if (arg[2]  == "help" or arg[2]  == ""):
 		print('Usage :-\n$ ./todo add "todo item"  # Add a new todo\n$ ./todo ls               # Show remaining todos\n$ ./todo del NUMBER       # Delete a todo\n$ ./todo done NUMBER      # Complete a todo\n$ ./todo help             # Show usage\n$ ./todo report           # Statistics')
 			
 	else if (arg[2]  == "ls"):
