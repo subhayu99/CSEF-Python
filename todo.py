@@ -9,9 +9,12 @@ def readtodo():
     return todoarray
 
 def readdone():
-    with open('done.txt', 'r+') as donefile:
-         todoarray= donefile.readlines()
-    return todoarray
+    try:
+        with open('done.txt', 'r+') as donefile:
+             todoarray= donefile.readlines()
+        return todoarray
+    except:
+    	print("There are no pending todos!")
 
 def savetodo(todoarray):
     with open('todo.txt', 'a+') as todofile:
@@ -20,9 +23,12 @@ def savetodo(todoarray):
     return 0
 
 def writetodo(todoarray):
-    with open('todo.txt', 'w+') as todofile:
-        for item in todoarray:
-            todofile.write("%s" % item)
+    try:
+        with open('todo.txt', 'w+') as todofile:
+            for item in todoarray:
+                todofile.write("%s" % item)
+    except:
+    	print("There are no pending todos!")
     return 0
 
 def writedone(donearray):
@@ -47,16 +53,23 @@ def todo(arg):
             todoarray.append(arg[2])
             savetodo(todoarray)
             print('Added todo: "{}"'.format(arg[2]))
+        else:
+        	print("Error: Missing todo string. Nothing added!")
 
     elif(arg[1] == "del"):
         if(arg[2]):
             try:
-                todoarray = readtodo()
-                todoarray.pop(int(arg[2])-1)
-                print("Deleted todo #{}".format(arg[2]))
-                writetodo(todoarray)
+                if(arg[2] != 0):
+                    todoarray = readtodo()
+                    todoarray.pop(int(arg[2])-1)
+                    print("Deleted todo #{}".format(arg[2]))
+                    writetodo(todoarray)
+                else:
+                	print("Error: todo #0 does not exist. Nothing to delete.")
             except:
                 print("Error: todo #{} does not exist. Nothing deleted.".format(arg[2]))
+        else:
+        	print("Error: Missing NUMBER for deleting todo.")
 
     elif(arg[1] == "done"):
         if(arg[2]):
@@ -71,6 +84,8 @@ def todo(arg):
                 print("Marked todo #{} as done.".format(arg[2]))
             except:
                 print("Error: todo #{} does not exist.".format(arg[2]))
+        else:
+        	print("Error: Missing NUMBER for marking todo as done.")
 
     elif(arg[1] == "report"):
         today = (date.today()).strftime("%Y-%m-%d")
