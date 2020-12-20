@@ -46,7 +46,7 @@ def todo(arg):
             todoarray = []
             todoarray.append(arg[2])
             savetodo(todoarray)
-            print("Added todo: {}".format(arg[2]))
+            print('Added todo: "{}"'.format(arg[2]))
 
     elif(arg[1] == "del"):
         if(arg[2]):
@@ -55,7 +55,7 @@ def todo(arg):
                 todoarray.pop(int(arg[2])-1)
                 print("Deleted todo #{}".format(arg[2]))
                 writetodo(todoarray)
-            except ValueError:
+            except:
                 print("Error: todo #{} does not exist. Nothing deleted.".format(arg[2]))
 
     elif(arg[1] == "done"):
