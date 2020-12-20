@@ -92,7 +92,7 @@ def todo(arg):
 
     elif(arg[1] == "report"):
         today = (date.today()).strftime("%Y-%m-%d")
-     ''   todoarray = readtodo()
+        todoarray = readtodo()
         donearray = readdone()
         print("{} Pending : {} Completed : {}".format(today, len(todoarray), len(donearray)))
 
