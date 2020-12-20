@@ -69,7 +69,7 @@ def todo(arg):
                 writetodo(todoarray)
                 writedone(donearray)
                 print("Marked todo #{} as done.".format(arg[2]))
-            except ValueError:
+            except:
                 print("Error: todo #{} does not exist.".format(arg[2]))
 
     elif(arg[1] == "report"):
