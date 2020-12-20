@@ -7,13 +7,10 @@ def readtodo():
     try:
         with open('todo.txt', 'r+') as todofile:
              todoarray= todofile.readlines()
-        return todoarray
     except FileNotFoundError:
         with open('todo.txt', 'w+') as todofile:
             todoarray= todofile.readlines()
-        return todoarray
-    except:
-    	print("There are no pending todos!")
+    return todoarray
 
 def readdone():
     try:
@@ -27,7 +24,7 @@ def readdone():
 def savetodo(todoarray):
     with open('todo.txt', 'a+') as todofile:
         for item in todoarray:
-            todofile.write("%s\n" % item)
+            todofile.write("%s" % item)
     return 0
 
 def writetodo(todoarray):
@@ -49,8 +46,11 @@ def todo(arg):
 
     elif (arg[1] == "ls"):
         todoarray = readtodo()
-        for index in range(len(todoarray)):
-            print("[" + str(len(todoarray) - index) + "] " + (todoarray[len(todoarray) - (index+1)].rstrip("\n")))
+        if(len(todoarray)>0):
+            for index in range(len(todoarray)):
+                print("[" + str(len(todoarray) - index) + "] " + (todoarray[len(todoarray) - (index+1)].rstrip("\n")))
+        else:
+            print("There are no pending todos!")
 
     elif (arg[1] == "add"):
         try:
@@ -64,7 +64,7 @@ def todo(arg):
     elif(arg[1] == "del"):
         try:
             try:
-                if(int(arg[2]) >= 0):
+                if(int(arg[2]) > 0):
                     todoarray = readtodo()
                     todoarray.pop(int(arg[2])-1)
                     print("Deleted todo #{}".format(arg[2]))
@@ -79,14 +79,17 @@ def todo(arg):
     elif(arg[1] == "done"):
         if(len(arg) == 3):
             try:
-                todoarray = readtodo()
-                donearray = readdone()
-                today = (date.today()).strftime("%Y-%m-%d")
-                done = todoarray.pop(int(arg[2])-1)
-                donearray.append("x " + today + " " + done)
-                writetodo(todoarray)
-                savedone(donearray)
-                print("Marked todo #{} as done.".format(arg[2]))
+                if(int(arg[2]) > 0):
+                    todoarray = readtodo()
+                    donearray = readdone()
+                    today = (date.today()).strftime("%Y-%m-%d")
+                    done = todoarray.pop(int(arg[2])-1)
+                    donearray.append("x " + today + " " + done)
+                    writetodo(todoarray)
+                    savedone(donearray)
+                    print("Marked todo #{} as done.".format(arg[2]))
+                elif(int(arg[2]) == 0):
+                	print("Error: todo #{} does not exist.".format(arg[2]))
             except:
                 print("Error: todo #{} does not exist.".format(arg[2]))
         elif(len(arg) < 3):
