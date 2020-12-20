@@ -43,23 +43,26 @@ def todo(arg):
         print('Usage :-\n$ ./todo add "todo item"  # Add a new todo\n$ ./todo ls               # Show remaining todos\n$ ./todo del NUMBER       # Delete a todo\n$ ./todo done NUMBER      # Complete a todo\n$ ./todo help             # Show usage\n$ ./todo report           # Statistics')
 
     elif (arg[1] == "ls"):
-        todoarray = readtodo()
+        try:
+            todoarray = readtodo()
+        except:
+        	print("There are no pending todos!")
         for index in range(len(todoarray)):
             print("[" + str(len(todoarray) - index) + "] " + (todoarray[len(todoarray) - (index+1)].rstrip("\n")))
 
     elif (arg[1] == "add"):
-        if(arg[2]):
+        try:
             todoarray = []
             todoarray.append(arg[2])
             savetodo(todoarray)
             print('Added todo: "{}"'.format(arg[2]))
-        else:
+        except: 
         	print("Error: Missing todo string. Nothing added!")
 
     elif(arg[1] == "del"):
         try:
             try:
-                if(arg[2] != 0):
+                if(arg[2] >= 0):
                     todoarray = readtodo()
                     todoarray.pop(int(arg[2])-1)
                     print("Deleted todo #{}".format(arg[2]))
@@ -73,7 +76,7 @@ def todo(arg):
 
     elif(arg[1] == "done"):
         try:
-            try:
+            if(arg[2]):
                 todoarray = readtodo()
                 donearray = readdone()
                 today = (date.today()).strftime("%Y-%m-%d")
@@ -82,14 +85,14 @@ def todo(arg):
                 writetodo(todoarray)
                 writedone(donearray)
                 print("Marked todo #{} as done.".format(arg[2]))
-            except:
+            else:
                 print("Error: todo #{} does not exist.".format(arg[2]))
         except:
         	print("Error: Missing NUMBER for marking todo as done.")
 
     elif(arg[1] == "report"):
         today = (date.today()).strftime("%Y-%m-%d")
-        todoarray = readtodo()
+     ''   todoarray = readtodo()
         donearray = readdone()
         print("{} Pending : {} Completed : {}".format(today, len(todoarray), len(donearray)))
 
