@@ -57,7 +57,7 @@ def todo(arg):
         	print("Error: Missing todo string. Nothing added!")
 
     elif(arg[1] == "del"):
-        if(arg[2]):
+        try:
             try:
                 if(arg[2] != 0):
                     todoarray = readtodo()
@@ -68,11 +68,11 @@ def todo(arg):
                 	print("Error: todo #0 does not exist. Nothing to delete.")
             except:
                 print("Error: todo #{} does not exist. Nothing deleted.".format(arg[2]))
-        else:
+        except:
         	print("Error: Missing NUMBER for deleting todo.")
 
     elif(arg[1] == "done"):
-        if(arg[2]):
+        try:
             try:
                 todoarray = readtodo()
                 donearray = readdone()
@@ -84,7 +84,7 @@ def todo(arg):
                 print("Marked todo #{} as done.".format(arg[2]))
             except:
                 print("Error: todo #{} does not exist.".format(arg[2]))
-        else:
+        except:
         	print("Error: Missing NUMBER for marking todo as done.")
 
     elif(arg[1] == "report"):
