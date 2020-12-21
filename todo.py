@@ -105,7 +105,7 @@ def todo(arg):
         today = (date.today()).strftime("%Y-%m-%d")
         todoarray = readtodo()
         donearray = readdone()
-        print("{} Pending : {} Completed : {}".format(today, len(todoarray), len(donearray)-1))
+        print("{} Pending : {} Completed : {}".format(today, len(todoarray), len(donearray)))
 
 
 todo(sys.argv)
