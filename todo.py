@@ -39,6 +39,12 @@ def savedone(donearray):
             donefile.write("%s" % item)
     return 0
 
+def writedone(donearray):
+    with open('done.txt', 'w+') as donefile:
+        for item in donearray:
+            donefile.write("%s" % item)
+    return 0
+
 
 def todo(arg):
     if (len(arg) == 1 or arg[1] == "help"):
@@ -86,7 +92,7 @@ def todo(arg):
                     done = todoarray.pop(int(arg[2])-1)
                     donearray.append("x " + today + " " + done)
                     writetodo(todoarray)
-                    savedone(donearray)
+                    writedone(donearray)
                     print("Marked todo #{} as done.".format(arg[2]))
                 elif(int(arg[2]) == 0):
                 	print("Error: todo #{} does not exist.".format(arg[2]))
@@ -99,7 +105,7 @@ def todo(arg):
         today = (date.today()).strftime("%Y-%m-%d")
         todoarray = readtodo()
         donearray = readdone()
-        print("{} Pending : {} Completed : {}".format(today, len(todoarray), len(donearray)))
+        print("{} Pending : {} Completed : {}".format(today, len(todoarray), len(donearray)-1))
 
 
 todo(sys.argv)
