@@ -33,6 +33,7 @@ Here's how it should work when you're done:
    **On \*nix:**
 
    ```
+   chmod +x todo.sh
    ./todo.sh
    ```
 ## Run Automated Tests
