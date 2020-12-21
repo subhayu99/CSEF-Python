@@ -24,7 +24,7 @@ def readdone():
 def savetodo(todoarray):
     with open('todo.txt', 'a+') as todofile:
         for item in todoarray:
-            todofile.write("%s" % item)
+            todofile.write("%s\n" % item)
     return 0
 
 def writetodo(todoarray):
@@ -70,7 +70,7 @@ def todo(arg):
                     print("Deleted todo #{}".format(arg[2]))
                     writetodo(todoarray)
                 elif(int(arg[2]) == 0):
-                	print("Error: todo #0 does not exist. Nothing to delete.")
+                	print("Error: todo #0 does not exist. Nothing deleted.")
             except:
                 print("Error: todo #{} does not exist. Nothing deleted.".format(arg[2]))
         except:
